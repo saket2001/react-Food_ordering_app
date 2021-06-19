@@ -1,0 +1,82 @@
+#nav_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1% auto;
+    background-color: #c52c2c;
+    color: #f7f3f3;
+}
+
+#nav__logo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 1% 2%;
+    text-transform: uppercase;
+}
+
+.nav__button {
+    width: 11rem;
+    padding: 1% 2%;
+    border-radius: 10px;
+    background-color: #363030;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #f7f3f3;
+    transition: all 1s ease;
+}
+
+.nav__button .cartIcon {
+    width: 1.35rem;
+    height: auto;
+    margin-right: 0.5rem;
+}
+
+.nav__button .button_text {
+    width: auto;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.nav__button .cartBadge {
+    width: 1.35rem;
+    border-radius: 8px;
+    background-color: #FFE3D8;
+    color: #140e0e;
+    font-weight: 600;
+    padding: 1% 2%;
+    margin-left: 0.8rem;
+    font-size: 1rem;
+}
+
+.nav__button:hover {
+    transform: scaleZ(1.1);
+    background-color: #2e2a2a;
+}
+
+@media screen and (max-width:768px) {
+    #nav_container {
+        padding: 2% 1%;
+    }
+
+    #nav__logo {
+        font-size: 1.1rem;
+        padding: 2%;
+    }
+
+    .nav__button {
+        width: auto;
+        padding: 2%;
+    }
+
+    .nav__button .cartIcon {
+        width: 1.15rem;
+        margin-right: 0.3rem;
+    }
+
+    .nav__button .cartBadge {
+        width: 1.15rem;
+        margin-left: 0.5rem;
+    }
+}

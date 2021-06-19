@@ -1,0 +1,148 @@
+.meals {
+    max-width: 60rem;
+    width: 90%;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    place-items: flex-start center;
+    background-color: #fff;
+    animation: meals-appear 1s ease-out forwards;
+}
+
+.meals ul {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* meal item */
+.meal_item {
+    width: auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 2% 5%;
+    margin: 1%;
+    border-bottom: 1px solid #ccc;
+}
+
+.meal_item:hover {
+    box-shadow: 7px 7px 5px #f2f3f3,
+        -7px -7px 5px #ffffff;
+}
+
+.meal_info,
+.meal_controls {
+    width: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+}
+
+.meal__title,
+.meal__price {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #30323a;
+}
+
+.meal_info .meal__details {
+    font-size: 1rem;
+    color: #615959;
+}
+
+.meal_controls {
+    place-items: flex-end;
+}
+
+.meal_controls .meal__addToBtn {
+    padding: 2% 5%;
+    color: #f7f3f3;
+    background-color: #c52c2c;
+    font-weight: 600;
+    font-size: 1.3rem;
+    transition: all 1s ease;
+}
+
+.meal_controls .meal__addToBtn:hover {
+    background-color: #8b2222;
+}
+
+.meal_controls .meal__counterButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.meal_controls .meal__counterButtons .meal__counterBtn {
+    width: 2rem;
+    padding: 1% 3%;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.meal_controls .meal__counterButtons .meal__counterBtn:hover {
+    background-color: #e2dddd;
+}
+
+
+.meal_controls .meal__counterButtons .meal__displayCounter {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+@keyframes meals-appear {
+    from {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width:768px) {
+    .meals {
+        max-width: 50rem;
+        width: 90%;
+    }
+
+    /* meal item */
+    .meal_item {
+        grid-template-columns: 1fr 0.5fr;
+        padding: 2%;
+    }
+
+    .meal_item:hover {
+        box-shadow: none;
+    }
+
+    .meal__title,
+    .meal__price {
+        font-size: 1.1rem;
+    }
+
+    .meal_info .meal__details {
+        font-size: 0.9rem;
+    }
+
+    .meal_controls {
+        place-items: flex-end;
+    }
+
+    .meal_controls .meal__addToBtn {
+        padding: 2% 5%;
+        font-size: 1rem;
+    }
+
+    .meal_controls .meal__counterButtons .meal__counterBtn {
+        width: 1.3rem;
+        font-size: 1rem;
+    }
+
+    .meal_controls .meal__counterButtons .meal__displayCounter {
+        font-size: 1.3rem;
+    }
+}

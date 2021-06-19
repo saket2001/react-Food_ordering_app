@@ -1,0 +1,128 @@
+.cart__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 5fr;
+    place-items: flex-start center;
+}
+
+p {
+    margin: 2%;
+    font-size: 1.5rem;
+}
+
+.cart_details {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+}
+
+.cart_details .cart__total {
+    font-size: 1.2rem;
+    padding: 1%;
+}
+
+.cart_details .cart__total span {
+    font-weight: 600;
+}
+
+.cart_details .cart_buyBtn {
+    padding: 2% 5%;
+    margin: 1% 0;
+    color: #f7f3f3;
+    background-color: #c52c2c;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.cart_actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.cart_actions .cart_CloseBtn {
+    width: 80%;
+    padding: 1%;
+    margin: 1% 0;
+    color: #f7f3f3;
+    background-color: #c52c2c;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* cart items */
+.cartItemList {
+    width: 100%;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    place-items: center;
+}
+
+.cartItem {
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1% 2%;
+    margin: 1% 0;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.cartItem:hover {
+    box-shadow: 7px 7px 5px #f2f3f3,
+        -7px -7px 5px #ffffff;
+}
+
+.cartItem .cartItem__title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #30323a;
+
+}
+
+.cartItem .cartItem__price {
+    font-size: 1rem;
+    color: #30323a;
+    font-weight: 600;
+}
+
+.cartItem .cartItem__quantity {
+    font-size: 1rem;
+    color: #615959;
+}
+
+.cartItem .cancelBtn {
+    padding: 1% 2%;
+    margin: 1% 0;
+    color: #f7f3f3;
+    background-color: #c52c2c;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 1s ease;
+}
+
+@media (max-width: 768px) {
+    .cart_details {
+        place-items: center flex-start;
+    }
+
+    /* cart items */
+    .cartItemList {
+        width: 100%;
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        place-items: center;
+    }
+
+    .cartItem {
+        width: 100%;
+        padding: 1% 2%;
+    }
+
+}
