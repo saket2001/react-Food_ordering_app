@@ -1,28 +1,22 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Modal from "../UI/Modal/Modal";
 import Button from "../UI/Button/Button";
 import style from "./Cart.module.css";
 import CartContext from "../../Context/CartContext";
 
 const Cart = (props) => {
-  const { cartList, CartState } = useContext(CartContext);
-  let [data, updateData] = useState(cartList);
-  const [cartState, updateState] = useState("");
+  const cartContext = useContext(CartContext);
+  const data = cartContext.cartList;
 
   const BuyCartItem = () => {
     setTimeout(() => {
-      updateData([]);
-      updateState("order placed");
-      cartList.length = 0;
+      cartContext.removeFn("", []);
     }, 1000);
   };
 
   const cancelDataItem = (id) => {
-    const index = data.findIndex((item) => item.id === id);
-    data.splice(index, 1);
-    updateData(data);
-    updateState(id);
-    CartState(id);
+    cartContext.removeFn(id, data);
+    cartContext.didCartChanged = "yes";
   };
 
   let cartItemList = <p>No Items in cart yet !</p>;

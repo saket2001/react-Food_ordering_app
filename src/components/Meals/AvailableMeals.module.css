@@ -105,7 +105,6 @@
 
 @media screen and (max-width:768px) {
     .meals {
-        max-width: 50rem;
         width: 90%;
     }
 
@@ -121,20 +120,18 @@
 
     .meal__title,
     .meal__price {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        font-weight: 500;
     }
 
-    .meal_info .meal__details {
+    .meal__details {
         font-size: 0.9rem;
     }
 
-    .meal_controls {
-        place-items: flex-end;
-    }
-
     .meal_controls .meal__addToBtn {
-        padding: 2% 5%;
-        font-size: 1rem;
+        width: 90%;
+        padding: 3% 5%;
+        font-size: 1.1rem;
     }
 
     .meal_controls .meal__counterButtons .meal__counterBtn {

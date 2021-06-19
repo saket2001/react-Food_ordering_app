@@ -106,8 +106,17 @@ p {
 }
 
 @media (max-width: 768px) {
+    p {
+        margin: 1%;
+        font-size: 1.3rem;
+    }
+
     .cart_details {
-        place-items: center flex-start;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .cart_details .cart_buyBtn {
+        font-size: 1.1rem;
     }
 
     /* cart items */

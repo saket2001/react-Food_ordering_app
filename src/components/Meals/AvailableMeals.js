@@ -39,17 +39,15 @@ const DUMMY_MEALS = [
   },
 ];
 
-const AvailableMeals = (props) => {
+const AvailableMeals = () => {
   const cartContextArr = useContext(CartContext);
   let [menuList, updateMenu] = useState(DUMMY_MEALS);
-  let [cartList, updateCart] = useState([]);
 
   const sendMealData = (id) => {
     const selectedItem = DUMMY_MEALS.filter((item) => item.id === id);
-
-    updateCart(...selectedItem);
-    cartContextArr.cartList.unshift(...selectedItem);
-    cartContextArr.CartState(id);
+    // add to cart
+    cartContextArr.addFn(...selectedItem);
+    cartContextArr.didCartChanged = false;
   };
 
   const incrementQuantity = (id) => {
@@ -80,7 +78,7 @@ const AvailableMeals = (props) => {
         <div className={style.meal__info}>
           <div className={style.meal__title}>{meal.name}</div>
           <div className={style.meal__details}>{meal.description}</div>
-          <div className={style.meal__price}>{meal.price}</div>
+          <div className={style.meal__price}>{meal.price} $</div>
         </div>
         <div className={style.meal_controls}>
           <div className={style.meal__counterButtons}>
