@@ -1,50 +1,82 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import CartContext from "../../Context/CartContext";
 import style from "./AvailableMeals.module.css";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 
-const DUMMY_MEALS = [
-  {
-    id: "m1",
-    name: "Sushi",
-    description: "Finest fish and veggies",
-    price: 22.99,
-    quantity: 1,
-    total: 22.99,
-  },
-  {
-    id: "m2",
-    name: "Schnitzel",
-    description: "A german specialty!",
-    price: 16.5,
-    quantity: 1,
-    total: 16.5,
-  },
-  {
-    id: "m3",
-    name: "Barbecue Burger",
-    description: "American, raw, meaty",
-    price: 12.99,
-    quantity: 1,
-    total: 12.99,
-  },
-  {
-    id: "m4",
-    name: "Green Bowl",
-    description: "Healthy...and green...",
-    price: 18.99,
-    quantity: 1,
-    total: 18.99,
-  },
-];
+// const DUMMY_MEALS = [
+//   {
+//     id: "m1",
+//     name: "Sushi",
+//     description: "Finest fish and veggies",
+//     price: 22.99,
+//     quantity: 1,
+//     total: 22.99,
+//   },
+//   {
+//     id: "m2",
+//     name: "Schnitzel",
+//     description: "A german specialty!",
+//     price: 16.5,
+//     quantity: 1,
+//     total: 16.5,
+//   },
+//   {
+//     id: "m3",
+//     name: "Barbecue Burger",
+//     description: "American, raw, meaty",
+//     price: 12.99,
+//     quantity: 1,
+//     total: 12.99,
+//   },
+//   {
+//     id: "m4",
+//     name: "Green Bowl",
+//     description: "Healthy...and green...",
+//     price: 18.99,
+//     quantity: 1,
+//     total: 18.99,
+//   },
+// ];
 
 const AvailableMeals = () => {
   const cartContextArr = useContext(CartContext);
-  let [menuList, updateMenu] = useState(DUMMY_MEALS);
+  let [menuList, updateMenu] = useState([]);
+  const [loadState, setLoadState] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      const menu = [];
+      // fetching data
+      const response = await fetch(
+        "https://react-food-ordering23-default-rtdb.firebaseio.com/meals.json"
+      );
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+
+      // converting return object into array of object
+      for (const i in data) {
+        menu.push({
+          id: i,
+          name: data[i].name,
+          description: data[i].description,
+          price: data[i].price,
+          total: data[i].price,
+          quantity: 1,
+        });
+      }
+      // set load state has false
+      setLoadState(false);
+      // updating menu state
+      updateMenu(menu);
+    };
+    getData();
+  }, []);
 
   const sendMealData = (id) => {
-    const selectedItem = DUMMY_MEALS.filter((item) => item.id === id);
+    const selectedItem = menuList.filter((item) => item.id === id);
     // add to cart
     cartContextArr.addFn(...selectedItem);
     cartContextArr.didCartChanged = false;
@@ -72,7 +104,7 @@ const AvailableMeals = () => {
     updateMenu(selectedItem);
   };
 
-  const mealList = DUMMY_MEALS.map((meal) => (
+  const mealList = menuList.map((meal) => (
     <li key={meal.id}>
       <div className={style.meal_item}>
         <div className={style.meal__info}>
@@ -116,7 +148,7 @@ const AvailableMeals = () => {
 
   return (
     <Card className={style.meals}>
-      <ul>{mealList}</ul>
+      <ul>{loadState ? <p>Getting Tasty Meals for you..</p> : mealList}</ul>
     </Card>
   );
 };

@@ -1,17 +1,50 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import Modal from "../UI/Modal/Modal";
 import Button from "../UI/Button/Button";
 import style from "./Cart.module.css";
 import CartContext from "../../Context/CartContext";
+import CheckoutForm from "../Checkout Form/CheckoutForm";
 
 const Cart = (props) => {
   const cartContext = useContext(CartContext);
   const data = cartContext.cartList;
+  const [checkoutState, setCheckout] = useState(false);
+  const [dataToSend, setData] = useState("");
 
-  const BuyCartItem = () => {
+  useEffect(() => {
+    const sendData = () => {
+      if (dataToSend.length > 0) {
+        fetch(
+          "https://react-food-ordering23-default-rtdb.firebaseio.com/orders.json",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(dataToSend),
+          }
+        );
+      }
+    };
+
+    sendData();
+  }, [dataToSend]);
+
+  const sendData = (userData) => {
+    // adding current cart orders to data
+    userData["userOrder"] = data;
+    // setting user data
+    setData(userData);
+    // clearing cart
     setTimeout(() => {
       cartContext.removeFn("", []);
-    }, 1000);
+    }, 2000);
+    // alerting
+    alert("Order Placed successfully!!");
+  };
+
+  const BuyCartItem = () => {
+    setCheckout(true);
   };
 
   const cancelDataItem = (id) => {
@@ -73,6 +106,9 @@ const Cart = (props) => {
       )}
       {cartItemList}
       <div className={style.cart_actions}>
+        {checkoutState && data.length > 0 && (
+          <CheckoutForm sendData={sendData} />
+        )}
         <Button
           className={style.cart_CloseBtn}
           onClick={() => {
